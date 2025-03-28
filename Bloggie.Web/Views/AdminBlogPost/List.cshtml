@@ -1,0 +1,45 @@
+﻿@model List<BlogPost>
+@{
+}
+
+
+<div class="container bg-secondary bg-opacity-10 py-5">
+    <h1>
+        Show All Blog Posts - Admin Functionality
+    </h1>
+</div>
+
+<div class="container py-5">
+    <table class="table">
+        <thead> 
+            <tr>
+                <th>Id</th>
+                <th>Heading</th>
+                <th>Page Title</th>
+                <th>Tags</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var blogPost in Model)
+            {
+                <tr>
+                    <td>@blogPost.Id</td>
+                    <td>@blogPost.Heading</td>
+                    <td>@blogPost.PageTitle</td>
+
+                    <td>
+                        <div class="d-flex">
+                            @foreach (var tag in blogPost.Tags)
+                            {
+                                <span class="badge bg-secondary me-1">@tag.Name</span>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-area="" asp-controller="AdminBlogPost" asp-action="Edit" asp-route-id="@blogPost.Id">Edit</a>
+                    </td>
+                </tr>
+            }
+    </table>
+</div>

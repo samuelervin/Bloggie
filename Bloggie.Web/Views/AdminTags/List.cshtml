@@ -1,0 +1,56 @@
+﻿
+@model List<Tag>
+@{
+}
+<div class="container bg-secondary bg-opacity-10 py-5">
+    <h1>
+        Show All Tags - Admin Functionality
+    </h1>
+</div>
+
+<div class="container py-5">
+    @if (Model != null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        DisplayName
+                    </th>
+                    <th></th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tag in Model)
+                {
+                    <tr>
+                        <td>
+                            @tag.Id
+                        </td>
+                        <td>
+                            @tag.Name
+                        </td>
+                        <td>
+                            @tag.DisplayName
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" asp-area="" asp-controller="AdminTags" asp-action="Edit" asp-route-id="@tag.Id">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No tags found!</p>
+    }
+
+</div>
