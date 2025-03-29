@@ -1,6 +1,7 @@
 using Bloggie.Web.Data;
 using Bloggie.Web.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Bloggie.Web
 {
@@ -28,6 +29,14 @@ namespace Bloggie.Web
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+            }
+
+            //Ensur DB is created
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<BloggingDbContext>();
+                context.Database.EnsureCreated();
             }
 
             app.UseHttpsRedirection();
